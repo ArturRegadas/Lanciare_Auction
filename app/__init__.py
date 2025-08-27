@@ -1,22 +1,19 @@
-from flask import Flask
+from flask import blueprints, Flask
 from flask_socketio import SocketIO
+from typing import Dict, Any
 from config import Config
 
-def create_app():
+socket_io = SocketIO(cors_allowed_origins="*")
 
+def create_app() -> Dict[str, Any]:
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config["SECRET_KEY"] = Config.SECRET_KEY;
 
-    socketIo = SocketIO(app)  
-    
     #Listing blueprints
-    from app.registerRoutes import register_routes
-    register_routes(app)
+    from app.services.payService import payment_bp
 
-    #Importing sockets events
-    from app import sockets
-
+    app.register_blueprint(payment_bp)
+    
+    socket_io.init_app(app)
     #Returning instance
-    return {"app":app, "socket":socketIo}
-
-
+    return {"app":app, "socket":socket_io}
