@@ -7,8 +7,8 @@ socket_io = SocketIO(cors_allowed_origins="*")
 
 def create_app() -> Dict[str, Any]:
     app = Flask(__name__)
-    app.config["SECRET_KEY"] = Config.SECRET_KEY;
-
+    app.config.from_object(Config)
+  
     #Listing blueprints
     from app.services.CreateAsaasCustomer import payment_bp
 
