@@ -10,7 +10,7 @@ def create_app() -> Dict[str, Any]:
     app.config["SECRET_KEY"] = Config.SECRET_KEY;
 
     #Listing blueprints
-    from app.services.payService import payment_bp
+    from app.services.CreateAsaasCustomer import payment_bp
 
     app.register_blueprint(payment_bp)
     

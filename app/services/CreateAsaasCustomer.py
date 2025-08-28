@@ -13,12 +13,6 @@ ASAAS_WALLET_ID = Config.ASAAS_WALLET_ID
 INTERNAL_TOKEN_API = Config.INTERNAL_TOKEN_API
 
 
-payment_bp = blueprints("payment", __name__, url_prefix = "/payment")
-
-@payment_bp.route("/")
-def home():
-    return "ok"
-
 #HELP func create_asaas_customer
 def create_asaas_customer(user: Dict[str, Any]) -> Tuple[int, Dict[str, Any]]:
 
@@ -67,25 +61,4 @@ def create_asaas_customer(user: Dict[str, Any]) -> Tuple[int, Dict[str, Any]]:
         "status": response.status_code, "description": response_data
     }
 
-#HELP func getPaymnentLink
-def get_payment_link():
-    pass
 
-def receive_payment(payment):
-    pass
-
-@payment_bp.route('/webhook', methods=['POST'])
-def payments_webhook() -> Dict[str, bool]:
-    body = request.json
-    received_token = request.headers.get("asaas-access-token")
-
-    print(request.headers, INTERNAL_TOKEN_API)
-
-    if (received_token != INTERNAL_TOKEN_API):
-        return jsonify({"received": False})
-
-    if body['event'] == 'PAYMENT_RECEIVED':
-        payment = body['payment']
-        receive_payment(payment)
-
-    return jsonify({"received": True})
