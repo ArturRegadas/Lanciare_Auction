@@ -1,6 +1,7 @@
-from flask_socketio import emit, join_room
+from flask_socketio import emit, join_room, rooms
 from typing import Dict, Any
 from myapp.setup.InitSocket import socket_io
+from flask import request
 
 @socket_io.on("join_room")
 def handle_join(data: Dict[str, Any]) -> None:
@@ -19,7 +20,9 @@ def handle_join(data: Dict[str, Any]) -> None:
 
 @socket_io.on("client_content")
 def handle_content(data: Dict[str, Any]) -> None:
-    room_id = data.get("to_room_id")
+    auction_rooms = [r for r in rooms() if r != request.sid]
+    room_id = auction_rooms[0]
+
     user_id = data.get("user_id"),
     username = data.get("username")
     value = data.get("value")
