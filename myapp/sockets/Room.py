@@ -2,7 +2,7 @@ from flask_socketio import emit, join_room, rooms
 from typing import Dict, Any
 from myapp.setup.InitSocket import socket_io
 from flask import request
-
+anonymous_users_number = 0
 @socket_io.on("join_room")
 def handle_join(data: Dict[str, Any]) -> None:
     room_id = data["room_id"]
@@ -11,10 +11,11 @@ def handle_join(data: Dict[str, Any]) -> None:
         "type": "entry",
         "room_id": room_id,
         "user_id": data.get("user_id"),
-        "username": data.get("username"),
+        "username": data.get("username") if not request.cookies.get("anonymous") else f"AnonymousUser{anonymous_users_number}",
         "product_id": data.get("product_id"),
         "product_name": data.get("product_name")
     }
+    anonymous_users_number+=1
     emit("server_content", {"response": response}, to=room_id)
 
 
