@@ -1,5 +1,6 @@
 import threading as thread
 from datetime import datetime, timedelta
+from myapp.setup.InitSqlAlchemy import db
 from myapp.setup.InitSocket import socket_io
 from myapp.models.Products import products
 from myapp.services.Win import set_winner
@@ -38,6 +39,9 @@ def close_auction(product_id: int) -> None:
         set_winner(product)
         product.end_datetime = products_timers[product_id]["end_datetime"]
         product.set_status("finished")
+
+        db.session.commit()
+
         products_timers.pop(product_id, None)
 
 

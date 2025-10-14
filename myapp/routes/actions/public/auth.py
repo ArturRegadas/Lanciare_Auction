@@ -8,14 +8,13 @@ from secrets import token_hex
 from typing import Dict, Any, Tuple
 
 auth_bp = Blueprint("auth", __name__)
-SING_IN = "/singIn"
-RESEND = "/auth/change/"
+
 
 def wait_sing_in() -> Response:
     return redirect(
         url_for(
             "waitingPage.WaitingPage",
-            link=SING_IN,
+            type='sing_in',
             _external=True
         )
     )
@@ -24,7 +23,8 @@ def wait_resend(email:str) -> Response:
     return redirect(
         url_for(
             "waitingPage.WaitingPage",
-            link= RESEND + email,
+            type = "resend",
+            email = email,
             _external=True
             )
         )
@@ -39,18 +39,21 @@ def sing_in() -> Response:
 @auth_bp.route("/auth/set/<string:token>", methods = ["POST", "GET"])
 def auth(token:str) -> Response:
     data = get_by_pending(token)
-    new_passord = request.form.get("new_password", None)
+
     if (not data): #not token
+        return sing_in()
+
+    new_password = request.form.get("new_password", None)
+    user = users.get_by_email(
+        data.get("email")
+    )
+
+    if (not user): 
         return sing_in()
     
     #change password
-    if (new_passord):
-        user = users.get_by_email(
-            data.get("email")
-        )
-        if (not user):
-            return sing_in()
-        user.password = generate_password_hash(new_passord)
+    if (new_password):
+        user.save_password(new_password)
     #new user
     else:
         create_user(data)
@@ -59,18 +62,23 @@ def auth(token:str) -> Response:
 
 @auth_bp.route("/auth/change/<string:email>")
 def changePassword(email:str) -> Response:
-    data = get_by_emails_dict(email)
+    token = get_by_emails_dict(email)
 
-    if (not data):
+    if (not token):
         if(not users.get_by_email(email)):
             return sing_in()
         
         token = add_in({"email": email})
-        auth_message(email = email, content = url_for("auth.auth", token=token, _external=True))
+        auth_message(
+            email = email,
+            content = url_for("changePassword.ChangePassword",token=token, _external=True)
+        )
         return wait_resend(email)
     
-    token = data.get(email)
-    auth_message(email = email, content = url_for("auth.auth", token=token, _external=True))
+    auth_message(
+        email = email,
+        content = url_for("changePassword.ChangePassword",token=token, _external=True)
+    )
     return wait_resend(email)
 
         

@@ -1,4 +1,5 @@
 from myapp.services.GetLastBid import last_bid
+from myapp.setup.InitSqlAlchemy import db
 from myapp.models.Products import products
 from myapp.models.Users import users
 from myapp.models.Bids import bids
@@ -12,3 +13,5 @@ def set_winner(product: products) -> Optional[str]:
     bid_value = winner_bid.bid_value
     winner_user.wallet -= bid_value 
     winner_bid.winner = True
+
+    db.session.commit()

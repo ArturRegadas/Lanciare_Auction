@@ -44,6 +44,7 @@ class products(db.Model):
 
         if (new_fk):
             self.product_status = new_fk
+        
 
     @classmethod
     def get_actives(cls) -> List[products]:
