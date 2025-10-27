@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Endereços</title>
+  <link rel="stylesheet" href="StyleAdress.css">
+</head>
+<body>
+   <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Placeholder</div>
+    <ul>
+      <li><a href="#">Quem somos</a></li>
+      <li><a href="#">Como Comprar</a></li>
+      <li><a href="#">Quero vender</a></li>
+      <li><a href="#">Nota de venda</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+    <div class="right">
+      <span>🛒</span>
+      <span>👤</span>
+    </div>
+  </div>
+  <main>
+    <h1>Cadastro de Endereços</h1>
+
+    <form id="form-enderecos">
+      <div id="enderecos-container">
+        <!-- Endereço 1 inicial -->
+        <div class="endereco" data-index="1">
+          <h3>Endereço 1</h3>
+
+          <label>CEP:</label>
+          <input type="text" name="cep" class="cep">
+
+          <label>Rua:</label>
+          <input type="text" name="rua" class="rua">
+
+          <label>Bairro:</label>
+          <input type="text" name="bairro" class="bairro">
+
+          <label>Cidade:</label>
+          <input type="text" name="cidade" class="cidade">
+
+          <label>Estado:</label>
+          <input type="text" name="estado" class="estado">
+
+          <label>Número:</label>
+          <input type="text" name="numero" class="numero">
+        </div>
+      </div>
+
+      <button type="button" id="add-endereco" class="btn">Adicionar Endereço</button>
+      <button type="submit" class="btn">Salvar</button>
+    </form>
+  </main>
+
+  <footer>
+    &copy; 2025 <span class="highlight">Placeholder LTDA.</span> Todos os direitos reservados.
+  </footer>
+
+ 
+</body>
+</html>
