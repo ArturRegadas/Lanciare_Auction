@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Leilões</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/auctions.css') }}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Placeholder</div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/profile">Perfil</a></li>
+      <li><a href="/inventory">Inventário</a></li>
+      <li><a href="/auctions">Leilões</a></li>
+    </ul>
+    <div class="right">
+      <span>🛒</span>
+      <span>👤</span>
+    </div>
+  </div>
+
+  <!-- Filtro de categorias -->
+  <main>
+    <div class="filter-bar">
+      <label for="categorySelect">Filtrar por categoria:</label>
+      <select id="categorySelect" name="category">
+        <option value="">Todas as categorias</option>
+        {% for cat in categories %}
+          <option value="{{ cat.category_id }}">{{ cat.name }}</option>
+        {% endfor %}
+      </select>
+      <button id="filterBtn">Filtrar</button>
+    </div>
+
+    <!-- Lista de produtos -->
+    <div id="auctions" class="products-grid">
+      <!-- Os cards de produtos serão inseridos via JS -->
+    </div>
+
+    <!-- Paginação -->
+    <div class="pagination">
+      <button id="prev-btn">Anterior</button>
+      <span id="page-info"></span>
+      <button id="next-btn">Próximo</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 <span class="highlight">Placeholder LTDA.</span> Todos os direitos reservados.
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="{{ url_for('static', filename='js/mains/AuctionsMain.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/api/GetProductsByFilter.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/ui/RenderProducts.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/ui/Pagination.js') }}"></script>
+
+</body>
+</html>
