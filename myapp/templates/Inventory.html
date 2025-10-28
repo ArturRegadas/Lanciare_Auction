@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventário</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/inventory.css') }}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Placeholder</div>
+    <ul>
+      <li><a href="#">Quem somos</a></li>
+      <li><a href="#">Como Comprar</a></li>
+      <li><a href="#">Quero vender</a></li>
+      <li><a href="#">Nota de venda</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+    <div class="right">
+      <span>🛒</span>
+      <a href="{{ url_for('profilePage.ProfilePage') }}">👤</a>
+    </div>
+  </div>
+
+  <main>
+    <h1>Meu Inventário</h1>
+    
+    <!-- Container de produtos -->
+    <div id="auctions">
+      <!-- Os produtos serão renderizados aqui pelo JS -->
+    </div>
+
+    <!-- Paginação -->
+    <div class="pagination">
+      <button class="page-btn" data-page="1">1</button>
+      <button class="page-btn" data-page="2">2</button>
+      <button class="page-btn" data-page="3">3</button>
+      <span>...</span>
+      <button id="prev-page">Anterior</button>
+    <button id="next-page">Próximo</button>
+
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 <span class="highlight">Placeholder LTDA.</span> Todos os direitos reservados.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/mains/InventoryMain.js') }}" type="module"></script>
+
+</body>
+</html>

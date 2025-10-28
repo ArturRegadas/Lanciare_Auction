@@ -1,0 +1,133 @@
+/* inventario.css */
+
+/* Reset e base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f8f9fc;
+  color: #333;
+  padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+  background: #eaf1fa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  border-bottom: 1px solid #ccc;
+}
+.navbar .logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+.navbar ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+.navbar .right span {
+  margin-left: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Main Container */
+main {
+  padding: 20px 0;
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Cards de produtos */
+#auctions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+#auctions div {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#auctions img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+#auctions h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+#auctions p {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Paginação */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #1d72b8;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination #page-info {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 30px;
+  background-color: #eaf1fa;
+  border-top: 1px solid #ccc;
+}
+footer .highlight {
+  font-weight: bold;
+}
