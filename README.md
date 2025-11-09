@@ -1,132 +1,133 @@
 # AuctionProject
-This repository is an academic project focused on the integration of database concepts, front and back-end web development and design, using technologies such as HTML, CSS, Python, JavaScript and MariaDB, which we will use to develop a fictitious auction website.
+Este repositório é um projeto acadêmico focado na integração de conceitos de banco de dados, desenvolvimento web front-end e back-end, e design, utilizando tecnologias como HTML, CSS, Python, JavaScript e MariaDB, que serão usadas para desenvolver um site fictício de leilões.
 
-## Sumary
+## Sumário
 
-## Project Architecture
+## Arquitetura do Projeto
 
-## Models
+## Modelos
 
-## Notification 
+## Notificação
 
-- ### Send ```/myapp/services/routes```
-  The function ```send_email(email, subject ,content)``` receives as parameters the user's email, subject and content of the message, and sends it to the user, notification management is done by 
-
+- ### Envio ```/myapp/services/routes```
+  A função ```send_email(email, subject ,content)``` recebe como parâmetros o e-mail do usuário, o assunto e o conteúdo da mensagem, e envia para o usuário. O gerenciamento de notificações é feito por...
 
 ## Asaas
-- ### Customer ```/services/CreateAsaasCustomer```
-  To make payments, a customer is required within the Asaas payment API. The ```create_asaas_customer(id_user)``` function creates a customer on the Asaas server and adds it to the database.
+- ### Cliente ```/services/CreateAsaasCustomer```
+  Para realizar pagamentos, é necessário criar um cliente dentro da API de pagamentos Asaas. A função ```create_asaas_customer(id_user)``` cria um cliente no servidor da Asaas e o adiciona ao banco de dados.
   
-  It returns the status code and description and receives the id of user who earns the id_asaas as a parameter.
+  Ela retorna o código de status e a descrição, e recebe o ID do usuário que ganhará o id_asaas como parâmetro.
   
-- ### PaymentLink
-  pass
+- ### Link de pagamento
+  em desenvolvimento 
 - ### Webhook ```/routes/actions/Webhook```
-  Whenever a change occurs in any of the payment processes, this route receives information about the process movement from the payment API. For security reasons, this route receives a key (password) in the header so that only authorized users can move these processes.
+  Sempre que ocorre alguma alteração em qualquer processo de pagamento, essa rota recebe as informações sobre o movimento do processo a partir da API de pagamento.
+Por motivos de segurança, essa rota recebe uma chave (senha) no cabeçalho para garantir que apenas usuários autorizados possam realizar movimentações.
   
-  This function operates through the ```"/payment/webhook"``` route and receives a JSON POST with information, including the most important ```EVENT```, which contains the information code. Below are the possible codes that can be received:
+ Essa função opera através da rota ```"/payment/webhook"``` e recebe um POST JSON com informações, incluindo a mais importante, ```"EVENT"```, que contém o código do evento.
+Abaixo estão os possíveis códigos que podem ser recebidos:
 
   ```PAYMENT_AUTHORIZED```
-    - Card payment that has been authorized and needs to be captured.
+    - Pagamento com cartão autorizado e aguardando captura.
 
     ```PAYMENT_APPROVED_BY_RISK_ANALYSIS```
-    - Card payment approved by manual risk analysis.
+    - Pagamento com cartão aprovado por análise manual de risco.
 
     ```PAYMENT_CREATED```
-    - Generation of new charge.
+    - Geração de uma nova cobrança.
 
     ```PAYMENT_CONFIRMED```
-    - Charge confirmed (payment made, but the balance has not yet been made available).
+    - Cobrança confirmada (pagamento efetuado, mas saldo ainda não disponível).
 
     ```PAYMENT_ANTICIPATED```
-    - Advance payment.
+    - Pagamento antecipado.
 
     ```PAYMENT_DELETED```
-    - Charge removed.
+    - Cobrança removida.
 
     ```PAYMENT_REFUNDED```
-    - Charge reversed.
+    - Cobrança estornada.
 
     ```PAYMENT_REFUND_DENIED```
-    - Refund denied.
+    - Estorno negado.
 
     ```PAYMENT_CHARGEBACK_REQUESTED```
-    - Received chargeback.
+    - Chargeback recebido.
 
     ```PAYMENT_AWAITING_CHARGEBACK_REVERSAL```
-    - Dispute won, awaiting transfer from the acquirer.
+    - Disputa ganha, aguardando transferência da adquirente.
 
     ```PAYMENT_DUNNING_REQUESTED```
-    - Request for negative listing.
+    - Solicitação de negativação.
 
     ```PAYMENT_CHECKOUT_VIEWED```
-    - Billing invoice viewed by the customer.
+    - Fatura visualizada pelo cliente.
 
     ```PAYMENT_PARTIALLY_REFUNDED```
-    - Charge partially reversed.
+    - Cobrança parcialmente estornada.
 
     ```PAYMENT_SPLIT_DIVERGENCE_BLOCK```
-    - Billing amount blocked due to split discrepancy.
+    - Valor bloqueado devido a divergência de divisão (split).
 
     ```PAYMENT_AWAITING_RISK_ANALYSIS```
-    - Card payment awaiting approval by manual risk analysis.
+    - Pagamento aguardando aprovação manual de risco.
 
     ```PAYMENT_REPROVED_BY_RISK_ANALYSIS```
-    - Card payment rejected by manual risk analysis.
+    - Pagamento reprovado pela análise de risco.
 
     ```PAYMENT_UPDATED```
-    - Change in due date or existing billing amount.
+    - Alteração na data de vencimento ou no valor da cobrança.
 
     ```PAYMENT_RECEIVED```
-    - Collection received.
+    - Cobrança recebida.
 
     ```PAYMENT_OVERDUE```
-    - Overdue billing.
+    - Cobrança vencida.
 
     ```PAYMENT_RESTORED```
-    - Payment restored.
+    - Pagamento restaurado.
 
     ```PAYMENT_REFUND_IN_PROGRESS```
-    - Refund in process (settlement is already scheduled, charge will be refunded after settlement is executed).
+    - Estorno em andamento (liquidação já agendada, estorno será realizado após execução).
 
     ```PAYMENT_RECEIVED_IN_CASH_UNDONE```
-    - Cash receipt undone.
+    - Recebimento em dinheiro desfeito.
 
     ```PAYMENT_CHARGEBACK_DISPUTE```
-    - In chargeback dispute (if documents are presented for dispute).
+    - Em disputa de chargeback (documentos apresentados para contestação).
 
     ```PAYMENT_DUNNING_RECEIVED```
-    - Receipt of negative rating.
+    - Recebimento de negativação.
 
     ```PAYMENT_BANK_SLIP_VIEWED```
-    - Billing slip viewed by the customer.
+    - Boleto visualizado pelo cliente.
 
     ```PAYMENT_CREDIT_CARD_CAPTURE_REFUSED```
-    - Card capture declined
+    - Captura do cartão recusada.
 
     ```PAYMENT_SPLIT_CANCELLED```
-    - Billing had a split canceled.
+    - Cobrança teve o split cancelado.
 
     ```PAYMENT_SPLIT_DIVERGENCE_BLOCK_FINISHED```
-    - Blocking of the charge amount due to split discrepancy has been finalized.
+    - Bloqueio devido a divergência de split finalizado.
 
 ## Socket
 - ### Join Room ```/sockets/Room```
-    Whenever a user joins an auction, all participants in that auction should be notified.
+    Sempre que um usuário entra em um leilão, todos os participantes desse leilão devem ser notificados.
 
-    This notification will be sent via Socket.IO, using the ```"join_room"``` event.
+    Essa notificação será enviada via Socket.IO, usando o evento ```"join_room"```
 
-    When a user connects to the auction, the server will send a message to all clients:
+    Quando um usuário se conecta ao leilão, o servidor enviará uma mensagem para todos os clientes:
 
-    In the ```"server_content"``` event
+    No evento ```"server_content"```
 
-    And specifically in the room corresponding to the auction the user joined.
+    E especificamente na sala correspondente ao leilão que o usuário entrou.
 
-    This way, the frontend can display updated information in real time.
+    Assim, o frontend poderá exibir informações atualizadas em tempo real.
 
-    The only required parameter is the auction ID,which will be in a json.
+    O único parâmetro necessário é o ID do leilão, que estará em um JSON.
 
-    will return a JSON:
+    O retorno será um JSON:
     ```js
     {
         type: "entry",
@@ -138,7 +139,7 @@ This repository is an academic project focused on the integration of database co
     }
     ```
 
-    Here's a JavaScript example:
+    Exemplo em JavaScript:
     ```html
       <script src="/socket.io/socket.io.js"></script>
       <script>
@@ -161,22 +162,22 @@ This repository is an academic project focused on the integration of database co
       </script>
     ```
 
-- ### Bid ```/socket/Room```
-  Whenever a user bids in an auction, all participants in that auction should be notified.
+- ### Lance ```/socket/Room```
+  Sempre que um usuário fizer um lance em um leilão, todos os participantes deverão ser notificados.
 
-  This notification will be sent by Socket.IO using the ```"bid_content"``` event.
+  Essa notificação será enviada via Socket.IO, usando o evento ```"bid_content"``` 
 
-  When a user bids, the server will send a message to all clients:
+  Quando um usuário fizer um lance, o servidor enviará uma mensagem para todos os clientes:
 
-  In the ```"server_content"``` event
+  No evento ```"server_content"```
 
-  And specifically in the room corresponding to the auction the user is in (placed the bid).
+  E especificamente na sala correspondente ao leilão em que o lance foi feito.
 
-  This way, the frontend will be able to display updated information in real time.
+  Assim, o frontend poderá exibir as informações atualizadas em tempo real.
 
-  The required parameters will be the auction ID, the ID of the user who placed the bid, and the bid amount,which will be in a json.
+  Os parâmetros necessários são: ID do leilão, ID do usuário que fez o lance e valor do lance, que estarão em um JSON.
 
-  will return a JSON:
+  Retorno esperado (JSON):
     ```js
     {
         type: "bid",
@@ -188,7 +189,7 @@ This repository is an academic project focused on the integration of database co
         product_name: STR
     }
     ```
-  Here's a JavaScript example:
+  Exemplo em JavaScript:
   ```html
       <script src="/socket.io/socket.io.js"></script>
       <script>
@@ -214,15 +215,17 @@ This repository is an academic project focused on the integration of database co
     ```
   
 
-- ### Close Auction ```/sockets/CloseRoom```
-  Whenever an auction is created, it will have a predetermined time limit to close. However, it could happen that a user makes a bid in the last minute. So whenever a user makes a bid in the last 2 minutes, the time limit resets to 2 minutes.
+- ### Fechar leilão ```/sockets/CloseRoom```
+  Sempre que um leilão é criado, ele possui um tempo limite predefinido para encerrar.
+No entanto, pode acontecer de um usuário dar um lance no último minuto.
+Por isso, sempre que um lance for feito nos últimos 2 minutos, o tempo é reiniciado para 2 minutos.
 
-  The ```close_auction(id_auction)``` function removes all participants from the socket room, deletes the auction, and changes its status.
+  A função ```close_auction(id_auction)``` remove todos os participantes da sala do socket, deleta o leilão e altera seu status.
 
-  To time it, there is the function ```start_auction_timer(auction_id, seconds)``` which calls the function ```close_auction()``` after giving the time, for the occasion in which a bid is made in the final minutes the function ```add_time_to_action(id_auction, seconds)``` will be called. In extreme cases or exceptions, for example a server crash, the function ```start()``` must be called in this case putting all the auctions in the database on timer again.
+  Para controlar o tempo, existe a função ```start_auction_timer(auction_id, seconds)```, que chama a funçãoon ```close_auction()``` após o tempo acabar. Caso um lance seja feito nos minutos finais, a função ```add_time_to_action(id_auction, seconds)``` will be called. é chamada. Em casos extremos ou exceções — por exemplo, uma queda do servidor — a função ```start()``` deve ser chamada, reiniciando o temporizador de todos os leilões registrados no banco de dados.
 
-## Configuration and Deployment
+## Configuração e Implantação
 
-## Security
+## Segurança
 
-## The Team
+## A Equipe
